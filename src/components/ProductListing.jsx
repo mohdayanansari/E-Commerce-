@@ -1,29 +1,29 @@
 import React, { useEffect } from "react";
-import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import Product from "./Product";
-import { setProducts } from "../redux/actions/product.action";
+import { fetchProducts, setProducts } from "../redux/actions/product.action";
 
 const ProductListing = () => {
   const products = useSelector((state) => state);
   const dispatch = useDispatch();
 
   // ! FAKE DATA API CALL
-  const fetchFakeProducts = async () => {
-    try {
-      const response = await axios.get("https://fakestoreapi.com/products");
-      dispatch(setProducts(response.data));
+  // todo NOW WE DON'T NEED TO CALL API FROM HERE IT WILL CALL THROUGH ACTION CREATOR >->
+  // const fetchFakeProducts = async () => {
+  //   try {
+  //     const response = await axios.get("https://fakestoreapi.com/products");
+  //     dispatch(setProducts(response.data));
 
-    //   console.log(response.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  //   console.log(response.data);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   useEffect(() => {
-    fetchFakeProducts();
+    dispatch(fetchProducts());
   }, []);
-//   console.log("Products: ", products);
+  //   console.log("Products: ", products);
 
   return (
     <>
